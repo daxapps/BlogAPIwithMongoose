@@ -1,0 +1,31 @@
+{
+  "name": "blogappapiwithmongoose",
+  "version": "1.0.0",
+  "description": "Make blog app API with Mongoose",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daxapps/BlogAPIwithMongoose.git"
+  },
+  "keywords": [
+    "mongoose",
+    "nodejs"
+  ],
+  "author": "Dax",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/daxapps/BlogAPIwithMongoose/issues"
+  },
+  "homepage": "https://github.com/daxapps/BlogAPIwithMongoose#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "mongoose": "^4.10.5",
+    "morgan": "^1.8.2",
+    "uuid": "^3.0.1"
+  }
+}
