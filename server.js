@@ -18,7 +18,7 @@ app.get('/posts', (req, res) => {
 		.find()
 		.exec()
 		.then(posts => {
-			res.json(posts.map((post) => post.apiRepr());
+			res.json(posts.map((post) => post.apiRepr()));
 		})
 		.catch(err => {
 				console.error(err);
@@ -113,6 +113,7 @@ app.use('*', function(req, res) {
 let server;
 
 function runServer(databaseUrl=DATABASE_URL, port=PORT) {
+  console.log(DATABASE_URL, "database")
 	return new Promise((resolve, reject) => {
 		mongoose.connect(databaseUrl, err => {
 			if (err) {
