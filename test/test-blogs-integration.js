@@ -73,42 +73,42 @@ describe('BlogPosts API resource', function() {
 		it('should return all existing blog posts', function() {
 			let res;
 			return chai.request(app)
-				.get('/posts')
-				.then(function(_res) {
-					res = _res;
-					res.should.have.status(200);
-					res.body.should.have.length.of.at.least(1);
-					return BlogPost.count();
-				})
+			.get('/posts')
+			.then(function(_res) {
+				res = _res;
+				res.should.have.status(200);
+				res.body.should.have.length.of.at.least(1);
+				return BlogPost.count();
+			})
 				// .then(count => {
 				// 	res.body.should.have.length.of(count);
 				// });
-		});
+			});
 
 		it('should return posts with right fields', function() {
 			let resPost;
 			return chai.request(app)
-				.get('/posts')
-				.then(function(res) {
-					res.should.have.status(200);
-					res.should.be.json;
-					res.body.should.be.a('array');
-					res.body.should.have.length.of.at.least(1);
+			.get('/posts')
+			.then(function(res) {
+				res.should.have.status(200);
+				res.should.be.json;
+				res.body.should.be.a('array');
+				res.body.should.have.length.of.at.least(1);
 
-					res.body.forEach(function(post) {
-						post.should.be.a('object');
-						post.should.include.keys(
-							'id', 'title', 'author', 'content', 'created');
-					});
-					resPost = res.body[0];
-					return BlogPost.findById(resPost.id);
-				})
-				.then(function(post) {
-					resPost.id.should.equal(post.id);
-					resPost.title.should.equal(post.title);
-					resPost.author.should.equal(post.authorName);
-					resPost.content.should.equal(post.content);
+				res.body.forEach(function(post) {
+					post.should.be.a('object');
+					post.should.include.keys(
+						'id', 'title', 'author', 'content', 'created');
 				});
+				resPost = res.body[0];
+				return BlogPost.findById(resPost.id);
+			})
+			.then(function(post) {
+				resPost.id.should.equal(post.id);
+				resPost.title.should.equal(post.title);
+				resPost.author.should.equal(post.authorName);
+				resPost.content.should.equal(post.content);
+			});
 		});
 	});
 
@@ -117,27 +117,27 @@ describe('BlogPosts API resource', function() {
 			const newPost = generateBlogPostData();
 
 			return chai.request(app)
-				.post('/posts')
-				.send(newPost)
-				.then(function(res) {
-					res.should.have.status(201);
-					res.should.be.json;
-					res.body.should.be.a('object');
-					res.body.should.include.keys(
-						'id', 'title', 'author', 'content', 'created');
-					res.body.title.should.equal(newPost.title);
-					res.body.id.should.not.be.null;
-					res.body.author.should.equal(
-						`${newPost.author.firstName} ${newPost.author.lastName}`);
-					res.body.content.should.equal(newPost.content);
-					return BlogPost.findById(res.body.id);
-				})
-				.then(function(post) {
-					post.title.should.equal(newPost.title);
-					post.author.firstName.should.equal(newPost.author.firstName);
-          post.author.lastName.should.equal(newPost.author.lastName);
-					post.content.should.equal(newPost.content);
-				});
+			.post('/posts')
+			.send(newPost)
+			.then(function(res) {
+				res.should.have.status(201);
+				res.should.be.json;
+				res.body.should.be.a('object');
+				res.body.should.include.keys(
+					'id', 'title', 'author', 'content', 'created');
+				res.body.title.should.equal(newPost.title);
+				res.body.id.should.not.be.null;
+				res.body.author.should.equal(
+					`${newPost.author.firstName} ${newPost.author.lastName}`);
+				res.body.content.should.equal(newPost.content);
+				return BlogPost.findById(res.body.id);
+			})
+			.then(function(post) {
+				post.title.should.equal(newPost.title);
+				post.author.firstName.should.equal(newPost.author.firstName);
+				post.author.lastName.should.equal(newPost.author.lastName);
+				post.content.should.equal(newPost.content);
+			});
 		});
 	});
 
@@ -153,30 +153,30 @@ describe('BlogPosts API resource', function() {
 			};
 
 			return BlogPost
-				.findOne()
-				.exec()
-				.then(function(post) {
-					updateData.id =  post.id;
-					return chai.request(app)
-						.put(`/posts/${post.id}`)
-						.send(updateData);
-				})
-				.then(function(res) {
-					res.should.have.status(204);
-					res.should.be.json;
-          res.body.should.be.a('object');
-          res.body.title.should.equal(updateData.title);
-          res.body.author.should.equal(
-            `${updateData.author.firstName} ${updateData.author.lastName}`);
-          res.body.content.should.equal(updateData.content);
-					return BlogPost.findById(res.body.id).exec();
-				})
-				.then(function(post) {
-					post.title.should.equal(updateData.title);
-					post.content.should.equal(updateData.content);
-					post.author.firstName.should.equal(updateData.author.firstName);
-          post.author.lastName.should.equal(updateData.author.lastName);
-				});
+			.findOne()
+			.exec()
+			.then(function(post) {
+				updateData.id =  post.id;
+				return chai.request(app)
+				.put(`/posts/${post.id}`)
+				.send(updateData);
+			})
+			.then(function(res) {
+				res.should.have.status(204);
+				res.should.be.json;
+				res.body.should.be.a('object');
+				res.body.title.should.equal(updateData.title);
+				res.body.author.should.equal(
+					`${updateData.author.firstName} ${updateData.author.lastName}`);
+				res.body.content.should.equal(updateData.content);
+				return BlogPost.findById(res.body.id).exec();
+			})
+			.then(function(post) {
+				post.title.should.equal(updateData.title);
+				post.content.should.equal(updateData.content);
+				post.author.firstName.should.equal(updateData.author.firstName);
+				post.author.lastName.should.equal(updateData.author.lastName);
+			});
 		});
 	});
 
@@ -185,19 +185,19 @@ describe('BlogPosts API resource', function() {
 			let post;
 
 			return BlogPost
-				.findOne()
-				.exec()
-				.then(function(_post) {
-					post = _post;
-					return chai.request(app).delete(`/posts/${post.id}`);
-				})
-				.then(function(res) {
-					res.should.have.status(204);
-					return BlogPost.findById(res.body.id).exec();
-				})
-				.then(function(_post) {
-					should.not.exist(_post);
-				});
+			.findOne()
+			.exec()
+			.then(function(_post) {
+				post = _post;
+				return chai.request(app).delete(`/posts/${post.id}`);
+			})
+			.then(function(res) {
+				res.should.have.status(204);
+				return BlogPost.findById(res.body.id).exec();
+			})
+			.then(function(_post) {
+				should.not.exist(_post);
+			});
 		});
 	});
 

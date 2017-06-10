@@ -2,3 +2,10 @@ language: node_js
 node_js: node
 services:
 - mongodb
+deploy:
+  provider: heroku
+  api_key:
+    secure: G1FQhZUQxdv6qv1YwFPoqB37I39/V7PqRVPjt+qFALO/7qyr5vkGCDAr4psQz2kWMbz9yEoVh0w/srS93sUwhCxe0XhXRTMKGiNvS59SgaByi9kXy6slnLz5PTyD+Qz/EmqcbphSUMIO/NGw3y3doj5+uGYCaZNOL9Z/xzqkgA7kt8Qd9hQzMyG2ToXw8aU1R5HAoatO2V0GklhDxeay2HryJZUHMI6BqFeO7am5IAXPWxsq8/vtA2hpH53I4sJapSaENEErztcuNBi6g3tTKuwyC1OhNmTayuoOu5t0EQKZ3rL9LHbiWm9/HOnQ7TU07cKn2omywathPF9FFpfkXgYCLpU3k8Jsrp3ddeF5ZT1oc5ds15tZvG7XeY5gNWubLVR5ec48oXW2MCh1uy81iiwZ+3n2HNbrCl4YSSJs0yq4xfNCoFdjyGcqfZJwaB+Zx1J7Ph4nH0N45+iU3nvINs/IV1P2OescmNoNz6AXUwi7EasA9P6gT109yZPcNjC+lER4N2z+WX0hsYwoRpuah8ajYGpO6ya4ZDPXqgv+BKvd3sQBQV0zf7tEB0LIhbQz5iJgxqzlcGICpXsJ0rZaOixUA2ZnvpvFwwSvyKBc9F4VyBfpWFsBbxXfm9NSfZFYfNedlKfOS2LxHg7awoxrAGbunNDLWAo+b9bF9+WEXQI=
+  app: guarded-waters-71542
+  on:
+    repo: daxapps/BlogAPIwithMongoose
